@@ -21,12 +21,10 @@ export default {
   },
   created: async function() {
     const db = firebase.firestore();
-    const data = await db
-      .collection("ontarioData")
-      .doc("metadata")
-      .get();
+    const ontarioDataRef = db.collection("ontarioData").doc("metadata");
+    const response = await ontarioDataRef.get();
 
-    console.log("Data: ", data.data());
+    console.log(response.data());
   }
 };
 </script>
