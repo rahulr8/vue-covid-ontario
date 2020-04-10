@@ -1,4 +1,4 @@
-export const NUM_RESOLVED = 1000;
+export const NUM_RESOLVED = 5559;
 export const NUM_FATALITIES = 1000;
 export const NUM_ACTIVE = 4000;
 
