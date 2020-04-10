@@ -1,9 +1,11 @@
-import axios from "axios";
-
-const BASE_URL = "";
+import firebase from "../../firebase";
 
 const state = {
-  todos: []
+  covidStats: null
+  // totalCases: null,
+  // activeCases: null,
+  // recoveredCases: null,
+  // fatalCases: null
 };
 
 const getters = {
@@ -14,10 +16,13 @@ const getters = {
 
 const actions = {
   async fetchCovidData({ commit }) {
-    const response = await axios.get(BASE_URL);
+    const db = firebase.firestore();
+    const ontarioDataRef = db.collection("ontarioData").doc("metadata");
+    const response = await ontarioDataRef.get();
+    const covidStats = response.data();
 
-    const todos = response.data;
-    commit("setTodos", todos);
+    console.log(covidStats);
+    commit("setCovidInfo", covidStats);
   }
   // async fetchTodos({ commit }) {
   //   const response = await axios.get(BASE_URL);
@@ -28,16 +33,7 @@ const actions = {
 };
 
 const mutations = {
-  setTodos: (state, todos) => (state.todos = todos),
-  newTodo: (state, todo) => state.todos.unshift(todo),
-  removeTodo: (state, id) =>
-    (state.todos = state.todos.filter(todo => todo.id !== id)),
-  updateTodo: (state, updatedTodo) => {
-    const index = state.todos.findIndex(todo => todo.id === updatedTodo.id);
-    if (index !== -1) {
-      state.todos.splice(index, 1, updatedTodo);
-    }
-  }
+  setCovidInfo: (state, covidStats) => (state.covidStats = covidStats)
 };
 
 export default {

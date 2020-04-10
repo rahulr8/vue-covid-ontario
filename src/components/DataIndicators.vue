@@ -9,7 +9,7 @@
 
 <script>
 import DataCard from "./DataCard";
-import firebase from "../firebase";
+import { mapActions } from "vuex";
 
 export default {
   name: "DataIndicators",
@@ -19,12 +19,11 @@ export default {
   components: {
     DataCard
   },
-  created: async function() {
-    const db = firebase.firestore();
-    const ontarioDataRef = db.collection("ontarioData").doc("metadata");
-    const response = await ontarioDataRef.get();
-
-    console.log(response.data());
+  methods: {
+    ...mapActions(["fetchCovidData"])
+  },
+  created() {
+    this.fetchCovidData();
   }
 };
 </script>
