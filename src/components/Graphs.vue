@@ -1,6 +1,6 @@
 <template>
   <div class="graphs">
-    <div class="">I am a graph</div>
+    <div class="">{{ msg }}</div>
   </div>
 </template>
 
