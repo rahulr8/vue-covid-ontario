@@ -1,14 +1,14 @@
 import firebase from "../../firebase";
 
 const state = {
-  covidStats: null
-  // totalCases: null,
-  // activeCases: null,
-  // recoveredCases: null,
-  // fatalCases: null
+  totalCases: null,
+  activeCases: null,
+  recoveredCases: null,
+  fatalCases: null
 };
 
 const getters = {
+  totalCases: state => state.totalCases,
   recoveredCases: state => state.recoveredCases,
   activeCases: state => state.activeCases,
   fatalCases: state => state.fatalCases
@@ -21,19 +21,24 @@ const actions = {
     const response = await ontarioDataRef.get();
     const covidStats = response.data();
 
-    console.log(covidStats);
     commit("setCovidInfo", covidStats);
   }
-  // async fetchTodos({ commit }) {
-  //   const response = await axios.get(BASE_URL);
-
-  //   const todos = response.data;
-  //   commit("setTodos", todos);
-  // }
 };
 
 const mutations = {
-  setCovidInfo: (state, covidStats) => (state.covidStats = covidStats)
+  setCovidInfo: (state, covidStats) => {
+    const {
+      total_cases,
+      active_cases,
+      recovered_cases,
+      fatal_cases
+    } = covidStats;
+
+    state.totalCases = total_cases;
+    state.activeCases = active_cases;
+    state.recoveredCases = recovered_cases;
+    state.fatalCases = fatal_cases;
+  }
 };
 
 export default {
