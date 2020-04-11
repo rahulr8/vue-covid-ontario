@@ -2,7 +2,7 @@
   <div id="app" class="app-container">
     <Header />
     <div class="data-graphs-container">
-      <DataIndicators msg="8000" class="data-container" />
+      <DataIndicators msg="9000" class="data-container" />
       <Graphs msg="This is a graph indicator" class="graphs-container" />
     </div>
     <Tables msg="This is a table indicator" class="tables-container" />
