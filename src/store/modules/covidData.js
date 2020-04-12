@@ -1,43 +1,52 @@
 import firebase from "../../firebase";
 
 const state = {
-  totalCases: null,
-  activeCases: null,
-  recoveredCases: null,
-  fatalCases: null
+  genderData: {},
+  ageGroupData: {},
+  outcomeTypeData: {},
+  acquisitionTypeData: {},
+  reportingCityData: {}
 };
 
 const getters = {
-  totalCases: state => state.totalCases,
-  recoveredCases: state => state.recoveredCases,
-  activeCases: state => state.activeCases,
-  fatalCases: state => state.fatalCases
+  genderData: state => state.genderData,
+  ageGroupData: state => state.ageGroupData,
+  outcomeTypeData: state => state.outcomeTypeData,
+  acquisitionTypeData: state => state.acquisitionTypeData,
+  reportingCityData: state => state.reportingCityData
 };
 
 const actions = {
   async fetchCovidData({ commit }) {
     const db = firebase.firestore();
-    const ontarioDataRef = db.collection("ontarioData").doc("metadata");
-    const response = await ontarioDataRef.get();
-    const covidStats = response.data();
+    const covidData = {};
+    const querySnapshot = await db.collection("ontarioData").get();
 
-    commit("setCovidInfo", covidStats);
+    querySnapshot.forEach(doc => (covidData[doc.id] = doc.data()));
+
+    commit("setGenderData", covidData["data_for_gender"]);
+    commit("setAgeGroupData", covidData["data_for_age_group"]);
+    commit("setOutcomeTypeData", covidData["data_for_outcome_type"]);
+    commit("setAcquisitionTypeData", covidData["data_for_acquisition_type"]);
+    commit("setReportingCityData", covidData["data_for_reporting_city"]);
   }
 };
 
 const mutations = {
-  setCovidInfo: (state, covidStats) => {
-    const {
-      total_cases,
-      active_cases,
-      recovered_cases,
-      fatal_cases
-    } = covidStats;
-
-    state.totalCases = total_cases;
-    state.activeCases = active_cases;
-    state.recoveredCases = recovered_cases;
-    state.fatalCases = fatal_cases;
+  setGenderData: (state, genderData) => {
+    state.genderData = genderData;
+  },
+  setAgeGroupData: (state, ageGroupData) => {
+    state.ageGroupData = ageGroupData;
+  },
+  setOutcomeTypeData: (state, outcomeTypeData) => {
+    state.outcomeTypeData = outcomeTypeData;
+  },
+  setAcquisitionTypeData: (state, acquisitionTypeData) => {
+    state.acquisitionTypeData = acquisitionTypeData;
+  },
+  setReportingCityData: (state, reportingCityData) => {
+    state.reportingCityData = reportingCityData;
   }
 };
 
