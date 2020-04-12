@@ -11,6 +11,8 @@ const state = {
 const getters = {
   //Gender
   genderData: state => state.genderData,
+  femaleCases: state => state.genderData["female"],
+  maleCases: state => state.genderData["male"],
 
   //Age group
   casesLessThan20: state => state.ageGroupData["<20"],
@@ -35,6 +37,10 @@ const getters = {
 
   //Acquisition
   acquisitionTypeData: state => state.acquisitionTypeData,
+  communitySpreadCases: state => state.acquisitionTypeData["community_spread"],
+  travelRelatedCases: state => state.acquisitionTypeData["travel_related"],
+  neitherAcquisitionCases: state => state.acquisitionTypeData["neither"],
+  unknownAcquisitionCases: state => state.acquisitionTypeData["unknown"],
 
   //Reporting city
   reportingCityData: state => state.reportingCityData
