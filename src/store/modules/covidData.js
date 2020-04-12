@@ -9,10 +9,25 @@ const state = {
 };
 
 const getters = {
+  //Gender
   genderData: state => state.genderData,
+
+  //Age group
   ageGroupData: state => state.ageGroupData,
-  outcomeTypeData: state => state.outcomeTypeData,
+
+  //Outcome
+  activeCases: state => state.outcomeTypeData["active_cases"],
+  recoveredCases: state => state.outcomeTypeData["recovered_cases"],
+  fatalCases: state => state.outcomeTypeData["fatal_cases"],
+  totalCases: state =>
+    state.outcomeTypeData["active_cases"] +
+    state.outcomeTypeData["recovered_cases"] +
+    state.outcomeTypeData["fatal_cases"],
+
+  //Acquisition
   acquisitionTypeData: state => state.acquisitionTypeData,
+
+  //Reporting city
   reportingCityData: state => state.reportingCityData
 };
 

@@ -1,26 +1,26 @@
 <template>
   <div class="data-indicators">
-    <DataCard label="Total Cases" number="5759" type="total" />
-    <DataCard label="Active Cases" number="2209" type="active" />
-    <DataCard label="Recovered" number="2305" type="recovery" />
-    <DataCard label="Fatalities" number="200" type="fatality" />
+    <DataCard label="Total Cases" v-bind:number="totalCases" type="total" />
+    <DataCard label="Active Cases" v-bind:number="activeCases" type="active" />
+    <DataCard label="Recovered" v-bind:number="recoveredCases" type="recovery" />
+    <DataCard label="Fatalities" v-bind:number="fatalCases" type="fatality" />
   </div>
 </template>
 
 <script>
 import DataCard from "./DataCard";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "DataIndicators",
-  props: {
-    msg: String
-  },
   components: {
     DataCard
   },
   methods: {
     ...mapActions(["fetchCovidData"])
+  },
+  computed: {
+    ...mapGetters(["activeCases", "recoveredCases", "fatalCases", "totalCases"])
   },
   created() {
     this.fetchCovidData();
@@ -28,4 +28,13 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.data-indicators {
+  display: flex;
+  padding: 2rem;
+
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+</style>

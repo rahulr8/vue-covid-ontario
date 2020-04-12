@@ -1,11 +1,7 @@
 <template>
   <div :class="dataCardClass">
-    <div class="data-card-text">
-      {{ label }}
-    </div>
-    <div class="data-card-number">
-      {{ number }}
-    </div>
+    <div class="data-card-text">{{ label }}</div>
+    <div class="data-card-number">{{ number }}</div>
   </div>
 </template>
 
@@ -27,8 +23,10 @@ export default {
 
 <style scoped>
 .data-card {
-  padding: 1rem;
+  padding: 1rem 2rem;
   margin: 1rem;
+
+  min-width: 8rem;
   font-weight: 700;
   color: black;
   border: 0.1rem inset #1c6ea4;

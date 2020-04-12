@@ -2,7 +2,7 @@
   <div id="app" class="app-container">
     <Header />
     <div class="data-graphs-container">
-      <DataIndicators msg="9000" class="data-container" />
+      <DataIndicators />
       <Graphs msg="This is a graph indicator" class="graphs-container" />
     </div>
     <Tables msg="This is a table indicator" class="tables-container" />
@@ -49,10 +49,6 @@ export default {
 .tables-container {
   padding: 10rem;
   flex: 1;
-}
-
-.data-container {
-  padding: 10rem;
 }
 .graphs-container {
   padding: 10rem;
