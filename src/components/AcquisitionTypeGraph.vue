@@ -1,5 +1,6 @@
 <template>
   <div class="graphs">
+    <h2>Cases by Acquisition Type</h2>
     <GChart
       v-if="mounted"
       type="ColumnChart"

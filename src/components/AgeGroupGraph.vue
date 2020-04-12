@@ -1,5 +1,6 @@
 <template>
   <div class="graphs">
+    <h2>Cases by Age Group</h2>
     <GChart
       v-if="mounted"
       type="ColumnChart"
@@ -20,8 +21,6 @@ export default {
     GChart
   },
   data() {
-    console.log("this.casesUnknown", this.$store.getters.casesUnknown);
-    console.log("test", this.test);
     return {
       mounted: false,
       chartData: [

@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <h1 class="text">
-      Ontario Covid Tracker
+      Ontario Covid-19 Tracker
     </h1>
   </div>
 </template>
