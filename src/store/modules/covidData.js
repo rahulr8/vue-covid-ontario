@@ -13,7 +13,16 @@ const getters = {
   genderData: state => state.genderData,
 
   //Age group
-  ageGroupData: state => state.ageGroupData,
+  casesLessThan20: state => state.ageGroupData["<20"],
+  casesIn20s: state => state.ageGroupData["20s"],
+  casesIn30s: state => state.ageGroupData["30s"],
+  casesIn40s: state => state.ageGroupData["40s"],
+  casesIn50s: state => state.ageGroupData["50s"],
+  casesIn60s: state => state.ageGroupData["60s"],
+  casesIn70s: state => state.ageGroupData["70s"],
+  casesIn80s: state => state.ageGroupData["80s"],
+  casesIn90s: state => state.ageGroupData["90s"],
+  casesUnknown: state => state.ageGroupData["Unknown"],
 
   //Outcome
   activeCases: state => state.outcomeTypeData["active_cases"],

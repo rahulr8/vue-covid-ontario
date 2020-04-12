@@ -1,7 +1,7 @@
 <template>
   <div :class="dataCardClass">
     <div class="data-card-text">{{ label }}</div>
-    <div class="data-card-number">{{ number }}</div>
+    <div v-if="number" class="data-card-number">{{ number }}</div>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   name: "DataCard",
   props: {
     label: String,
-    number: String,
+    number: Number,
     type: String
   },
   data() {

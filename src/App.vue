@@ -1,11 +1,11 @@
 <template>
   <div id="app" class="app-container">
     <Header />
-    <div class="data-graphs-container">
+    <div class="data-tables-container">
       <DataIndicators />
-      <Graphs msg="This is a graph indicator" class="graphs-container" />
+      <Tables msg="This is a table indicator" class="tables-container" />
     </div>
-    <Tables msg="This is a table indicator" class="tables-container" />
+    <Graphs msg="This is a graph indicator" class="graphs-container" />
   </div>
 </template>
 
@@ -41,16 +41,17 @@ export default {
   flex-direction: column;
 }
 
-.data-graphs-container {
+.data-tables-container {
   display: flex;
   justify-content: center;
   flex: 1;
 }
 .tables-container {
   padding: 10rem;
-  flex: 1;
 }
+
 .graphs-container {
-  padding: 10rem;
+  flex: 1;
+  padding: 2rem;
 }
 </style>
