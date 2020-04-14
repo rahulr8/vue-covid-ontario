@@ -34,15 +34,15 @@ export default {
 }
 
 .data-card-total {
-  background-color: lightblue;
+  background-color: #e4eaea;
 }
 .data-card-active {
-  background-color: goldenrod;
+  background-color: #95947f;
 }
 .data-card-recovery {
-  background-color: greenyellow;
+  background-color: #c6b29b;
 }
 .data-card-fatality {
-  background-color: red;
+  background-color: #ae621f;
 }
 </style>
