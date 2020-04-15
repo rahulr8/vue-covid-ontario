@@ -1,6 +1,7 @@
 <template>
   <div class="graphs">
     <h2>Cases by Gender</h2>
+    <h3>{{ this.femaleCases() }}</h3>
     <GChart
       v-if="mounted"
       type="ColumnChart"
@@ -25,7 +26,7 @@ export default {
       mounted: false,
       chartData: [
         ["Gender", "Cases"],
-        ["Female", 3609],
+        ["Female", this.femaleCases()],
         ["Male", 2997]
       ],
       chartOptions: {
