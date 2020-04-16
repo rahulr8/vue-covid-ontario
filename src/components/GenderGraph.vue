@@ -1,11 +1,11 @@
 <template>
   <div class="graphs">
     <h2>Cases by Gender</h2>
-    <h3>{{ this.femaleCases() }}</h3>
+    <h3>{{ this.femaleCases }}</h3>
     <GChart
-      v-if="mounted"
+      v-if="this.mounted"
       type="ColumnChart"
-      :data="chartData"
+      :data="this.chartData()"
       :options="chartOptions"
       :resizeDebounce="500"
     />
@@ -14,7 +14,7 @@
 
 <script>
 import { GChart } from "vue-google-charts";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "GenderGraph",
@@ -22,13 +22,17 @@ export default {
     GChart
   },
   data() {
+    console.log("this.femaleCases", this.femaleCases);
     return {
       mounted: false,
-      chartData: [
-        ["Gender", "Cases"],
-        ["Female", this.femaleCases()],
-        ["Male", 2997]
-      ],
+      chartData: () => {
+        console.log("Inside func: ", this.femaleCases);
+        return [
+          ["Gender", "Cases"],
+          ["Female", this.femaleCases],
+          ["Male", 2997]
+        ];
+      },
       chartOptions: {
         chart: {
           title: "Cases by Gender"
@@ -37,10 +41,14 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["fetchCovidData"])
+  },
+  computed: {
     ...mapGetters(["femaleCases", "maleCases"])
   },
-  created() {
+  mounted() {
     this.mounted = true;
+    this.fetchCovidData();
   }
 };
 </script>
