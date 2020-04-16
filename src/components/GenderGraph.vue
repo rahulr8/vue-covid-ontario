@@ -3,7 +3,6 @@
     <h2>Cases by Gender</h2>
     <h3>{{ this.femaleCases }}</h3>
     <GChart
-      v-if="this.mounted"
       type="ColumnChart"
       :data="this.chartData()"
       :options="chartOptions"
@@ -22,15 +21,13 @@ export default {
     GChart
   },
   data() {
-    console.log("this.femaleCases", this.femaleCases);
     return {
       mounted: false,
       chartData: () => {
-        console.log("Inside func: ", this.femaleCases);
         return [
           ["Gender", "Cases"],
           ["Female", this.femaleCases],
-          ["Male", 2997]
+          ["Male", this.maleCases]
         ];
       },
       chartOptions: {
@@ -45,10 +42,6 @@ export default {
   },
   computed: {
     ...mapGetters(["femaleCases", "maleCases"])
-  },
-  mounted() {
-    this.mounted = true;
-    this.fetchCovidData();
   }
 };
 </script>
