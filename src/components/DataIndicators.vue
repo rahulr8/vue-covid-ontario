@@ -16,6 +16,7 @@ export default {
   components: {
     DataCard
   },
+  // Check pattern from gender graphs
   methods: {
     ...mapActions(["fetchCovidData"])
   },

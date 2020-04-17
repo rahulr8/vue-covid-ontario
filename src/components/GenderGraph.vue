@@ -20,10 +20,11 @@ export default {
   components: {
     GChart
   },
+  // Use functions instead of keys to maintain reactivity (e.g. chartData)
   data() {
     return {
       mounted: false,
-      chartData: () => {
+      chartData() {
         return [
           ["Gender", "Cases"],
           ["Female", this.femaleCases],

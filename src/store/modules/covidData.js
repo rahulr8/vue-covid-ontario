@@ -8,9 +8,11 @@ const state = {
   reportingCityData: {},
 };
 
+// Getters are like selectors - They let you access a part of the state
+// Getters accept two arguments. (state, getters). You can use the return value of other getters too
+// You can also curry a getter to make it accep a parameter to perform calculations
 const getters = {
   //Gender
-  genderData: (state) => state.genderData,
   femaleCases: (state) => state.genderData["total_female"],
   maleCases: (state) => state.genderData["total_male"],
 
@@ -36,7 +38,6 @@ const getters = {
     state.outcomeTypeData["fatal_cases"],
 
   //Acquisition
-  acquisitionTypeData: (state) => state.acquisitionTypeData,
   communitySpreadCases: (state) =>
     state.acquisitionTypeData["community_spread"],
   travelRelatedCases: (state) => state.acquisitionTypeData["travel_related"],
@@ -47,6 +48,7 @@ const getters = {
   reportingCityData: (state) => state.reportingCityData,
 };
 
+// Actions are Async!
 const actions = {
   async fetchCovidData({ commit }) {
     const db = firebase.firestore();
@@ -63,6 +65,8 @@ const actions = {
   },
 };
 
+// Mutations are Synchronous!
+// Always put mutations within actions to future proof your app and help you scale
 const mutations = {
   setGenderData: (state, genderData) => {
     state.genderData = genderData;
