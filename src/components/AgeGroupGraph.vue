@@ -1,12 +1,7 @@
 <template>
   <div class="graphs">
     <h2>Cases by Age Group</h2>
-    <GChart
-      type="ColumnChart"
-      :data="chartData()"
-      :options="chartOptions"
-      :resizeDebounce="500"
-    />
+    <GChart type="ColumnChart" :data="chartData()" :options="chartOptions" :resizeDebounce="500" />
   </div>
 </template>
 
@@ -16,7 +11,7 @@ import { reactive, toRefs } from "@vue/composition-api";
 
 export default {
   components: {
-    GChart,
+    GChart
   },
   setup(_, context) {
     const ageGroupData = reactive({
@@ -42,16 +37,16 @@ export default {
         ["70s", ageGroupData.casesIn70s()],
         ["80s", ageGroupData.casesIn80s()],
         ["90s", ageGroupData.casesIn90s()],
-        ["Unknown", ageGroupData.casesUnknown()],
+        ["Unknown", ageGroupData.casesUnknown()]
       ],
       chartOptions: {
         chart: {
-          title: "Cases by Age Group",
-        },
-      },
+          title: "Cases by Age Group"
+        }
+      }
     });
 
     return toRefs(ageGroupData);
-  },
+  }
 };
 </script>
