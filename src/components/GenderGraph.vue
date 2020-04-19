@@ -1,10 +1,9 @@
 <template>
   <div class="graphs">
     <h2>Cases by Gender</h2>
-    <h3>{{ this.femaleCases }}</h3>
     <GChart
       type="ColumnChart"
-      :data="this.chartData()"
+      :data="chartData()"
       :options="chartOptions"
       :resizeDebounce="500"
     />
@@ -13,36 +12,29 @@
 
 <script>
 import { GChart } from "vue-google-charts";
-import { mapGetters, mapActions } from "vuex";
+
+import { ref } from "@vue/composition-api";
 
 export default {
-  name: "GenderGraph",
   components: {
-    GChart
+    GChart,
   },
-  // Use functions instead of keys to maintain reactivity (e.g. chartData)
-  data() {
-    return {
-      mounted: false,
-      chartData() {
-        return [
-          ["Gender", "Cases"],
-          ["Female", this.femaleCases],
-          ["Male", this.maleCases]
-        ];
+  setup(_, context) {
+    const femaleCases = ref(() => context.root.$store.getters.femaleCases);
+    const maleCases = ref(() => context.root.$store.getters.maleCases);
+
+    const chartData = ref(() => [
+      ["Gender", "Cases"],
+      ["Female", femaleCases.value()],
+      ["Male", maleCases.value()],
+    ]);
+    const chartOptions = ref({
+      chart: {
+        title: "Cases by Gender",
       },
-      chartOptions: {
-        chart: {
-          title: "Cases by Gender"
-        }
-      }
-    };
+    });
+
+    return { femaleCases, maleCases, chartData, chartOptions };
   },
-  methods: {
-    ...mapActions(["fetchCovidData"])
-  },
-  computed: {
-    ...mapGetters(["femaleCases", "maleCases"])
-  }
 };
 </script>
