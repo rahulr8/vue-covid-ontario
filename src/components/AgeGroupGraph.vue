@@ -2,9 +2,8 @@
   <div class="graphs">
     <h2>Cases by Age Group</h2>
     <GChart
-      v-if="mounted"
       type="ColumnChart"
-      :data="chartData"
+      :data="chartData()"
       :options="chartOptions"
       :resizeDebounce="500"
     />
@@ -13,72 +12,46 @@
 
 <script>
 import { GChart } from "vue-google-charts";
-import { mapGetters } from "vuex";
+import { reactive, toRefs } from "@vue/composition-api";
 
 export default {
-  name: "AgeGroupGraph",
   components: {
-    GChart
+    GChart,
   },
-  data() {
-    return {
-      mounted: false,
-      chartData: [
+  setup(_, context) {
+    const ageGroupData = reactive({
+      casesLessThan20: () => context.root.$store.getters.casesLessThan20,
+      casesIn20s: () => context.root.$store.getters.casesIn20s,
+      casesIn30s: () => context.root.$store.getters.casesIn30s,
+      casesIn40s: () => context.root.$store.getters.casesIn40s,
+      casesIn50s: () => context.root.$store.getters.casesIn50s,
+      casesIn60s: () => context.root.$store.getters.casesIn60s,
+      casesIn70s: () => context.root.$store.getters.casesIn70s,
+      casesIn80s: () => context.root.$store.getters.casesIn80s,
+      casesIn90s: () => context.root.$store.getters.casesIn40s,
+      casesUnknown: () => context.root.$store.getters.casesUnknown,
+
+      chartData: () => [
         ["Age Group", "Cases"],
-        ["<20", 780],
-        ["20s", 868],
-        ["30s", 1041],
-        ["40s", 1262],
-        ["50s", 981],
-        ["60s", 634],
-        ["70s", 572],
-        ["80s", 347],
-        ["90s", 157],
-        ["Unknown", 6]
+        ["<20", ageGroupData.casesLessThan20()],
+        ["20s", ageGroupData.casesIn20s()],
+        ["30s", ageGroupData.casesIn30s()],
+        ["40s", ageGroupData.casesIn40s()],
+        ["50s", ageGroupData.casesIn50s()],
+        ["60s", ageGroupData.casesIn60s()],
+        ["70s", ageGroupData.casesIn70s()],
+        ["80s", ageGroupData.casesIn80s()],
+        ["90s", ageGroupData.casesIn90s()],
+        ["Unknown", ageGroupData.casesUnknown()],
       ],
       chartOptions: {
         chart: {
-          title: "Cases by Age Group"
-        }
-      }
-    };
+          title: "Cases by Age Group",
+        },
+      },
+    });
+
+    return toRefs(ageGroupData);
   },
-  computed: {
-    test: {
-      get() {
-        return this.casesLessThan20();
-      }
-    }
-  },
-  methods: {
-    ...mapGetters([
-      "casesLessThan20",
-      "casesIn20s",
-      "casesIn30s",
-      "casesIn40s",
-      "casesIn50s",
-      "casesIn60s",
-      "casesIn70s",
-      "casesIn80s",
-      "casesIn90s",
-      "casesUnknown"
-    ])
-  },
-  created() {
-    // this.chartData = [
-    //   ["Age Group", "Cases"],
-    //   ["<20", this.$store.getters.casesLessThan20],
-    //   ["20s", this.$store.getters.casesIn20s],
-    //   ["30s", this.$store.getters.casesIn30s],
-    //   ["40s", this.$store.getters.casesIn40s],
-    //   ["50s", this.$store.getters.casesIn50s],
-    //   ["60s", this.$store.getters.casesIn60s],
-    //   ["70s", this.$store.getters.casesIn70s],
-    //   ["80s", this.$store.getters.casesIn80s],
-    //   ["90s", this.$store.getters.casesIn90s],
-    //   ["Unknown", this.$store.getters.casesUnknown]
-    // ];
-    this.mounted = true;
-  }
 };
 </script>
